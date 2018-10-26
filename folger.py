@@ -1,7 +1,8 @@
 import os, itertools, re
 from collections import defaultdict
 from operator import itemgetter, attrgetter
-from play import *
+from importlib import reload
+import play as playlib
 
 ACT_SPLIT    = re.compile(r'ACT\s+\d+')
 SCENE_SPLIT  = re.compile(r'Scene\s+\d+')
@@ -50,31 +51,36 @@ def scene2speeches(text, act, scene):
         raise ValueError('Bad formatting in %d.%d: %s' % (act.number, scene.number, str(names)))
     
     # make characters
-    characters = map(Character, names)
+    #characters = map(playlib.Character, names)
+    characterNames = set(names)
+    characters = map(playlib.Character, set(names))
+    characterDict = {character.name : character for character in characters}
 
     # make speeches
     speeches = []
     lineNumber = 1  # line numbers reset at scene breaks
-    for character, line in zip(characters, lines):
-        newSpeech = Speech(character, act, scene, lineNumber, line)
+    for name, line in zip(names, lines):
+        character = characterDict[name]
+        newSpeech = playlib.Speech(character, act, scene, lineNumber, line)
         speeches.append(newSpeech)
         lineNumber += len(newSpeech.lines)
         
     return speeches
 
 def processText(title, text):
-    play = Play(title)
+    reload(playlib)
+    play = playlib.Play(title)
 
     # parse the text into acts
     actTexts = play2acts(text)
     for actNumber, actText in actTexts.items():
-        act = Act(actNumber)
+        act = playlib.Act(actNumber)
         play.addAct(act)
 
         # parse the act into scenes
         sceneTexts = act2scenes(actText)
         for sceneNumber, sceneText in sceneTexts.items():
-            scene = Scene(sceneNumber)
+            scene = playlib.Scene(sceneNumber)
             scene.act = act
             act.addScene(scene)
             

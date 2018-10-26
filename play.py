@@ -1,3 +1,5 @@
+from importlib import reload
+import util; reload(util)
 from util import *
 
 # describes relationships that various parts of the play can have
@@ -13,6 +15,8 @@ class HasScenes(object):
 class HasSpeeches(object):
     def lines(self):
         return sum(len(speech) for speech in self.speeches)
+    def words(self):
+        return sum(len(speech.words) for speech in self.speeches)
 
 @containsSetField('character')
 class HasCharacters(object):
@@ -36,7 +40,7 @@ class Act(Numbered, HasCharacters, HasScenes):
 class Scene(Numbered, HasCharacters, HasSpeeches):
     pass
 
-@registered
+#@registered
 class Character(Named, HasSpeeches):
     @property
     def scenes(self):
@@ -52,6 +56,7 @@ class Speech(object):
         self.startline = startline
         self.text = text
         self.lines = text.split('\n')
+        self.words = text.split()
         self.endline = startline + len(self)
         
     def __len__(self):
