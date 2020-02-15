@@ -138,12 +138,14 @@ def metrics(play):
     numScenes = len(play.scenes)
     #characters = sorted(play.characters, key=lambda c: len(c.lines()))
 
-    results = []
+    results = ['Role,Lines,Words,Scenes']
     for character in play.characters:
         characterScenes = len(character.scenes)
         characterName = character.name
         characterLines = character.lines()
-        results.append('%s,%s,%s' % (characterName, characterLines, characterScenes))
+        characterWords = character.words()
+        results.append('%s,%s,%s,%s' %
+                       (characterName, characterLines, characterWords, characterScenes))
 
     return '\n'.join(results)
 

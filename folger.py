@@ -7,8 +7,8 @@ ACT_SPLIT    = re.compile(r'ACT\s+\d+')
 SCENE_SPLIT  = re.compile(r'Scene\s+\d+')
 BUSINESS_RE  = re.compile(r'((,\s+)?\[.+?\])|(^\[.*$)|(^[^\[]+\])$', re.MULTILINE)
 MARKUP_RE    = re.compile(r'=+') 
-SPEECH_RE    = re.compile(r'^([A-Z][A-Z]+\s+)', re.MULTILINE)
-CHARACTER_RE = re.compile(r'^[A-Z]+$')
+SPEECH_RE    = re.compile(r'^([A-Z][A-Z\']+[ ]?[A-Z]+\s+)', re.MULTILINE)
+CHARACTER_RE = re.compile(r'^[A-Z][A-Z\']+[ ]?[A-Z]+')
 
 def makeNumberedSplit(text, splitter, hasFrontMatter=True):
     '''returns a dictionary of {number : text}'''

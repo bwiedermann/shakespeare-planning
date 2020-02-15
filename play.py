@@ -14,6 +14,9 @@ class HasSpeeches(object):
     def lines(self):
         return sum(len(speech) for speech in self.speeches)
 
+    def words(self):
+        return sum(len(speech.words) for speech in self.speeches)
+
 @containsSetField('character')
 class HasCharacters(object):
     def addCharacter(self, character):
@@ -52,6 +55,7 @@ class Speech(object):
         self.startline = startline
         self.text = text
         self.lines = text.split('\n')
+        self.words = text.split()
         self.endline = startline + len(self)
         
     def __len__(self):
