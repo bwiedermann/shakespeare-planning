@@ -117,7 +117,7 @@ def heatMap(x, y, z, title=None):
         xaxis2=bottomAxis,
         yaxis=defaultAxis,
         title=title,
-        # height = 200,
+        height=800,
     )
 
     return {'data': data, 'layout': layout}
