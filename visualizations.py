@@ -1,7 +1,7 @@
 from plotly.graph_objs import Bar, Histogram, Layout, Heatmap
 from plotly.tools import FigureFactory
 from operator import attrgetter
-from play import isInScene, speechesPerScene, linesPerScene, wordsPerScene
+from stats import isInScene, speechesPerScene, linesPerScene, wordsPerScene
 
 # ========================================
 # Bar Plots
