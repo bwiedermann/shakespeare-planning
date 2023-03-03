@@ -43,6 +43,7 @@ def characterTable(play):
 
 def playTable(play):
     scenes = play.scenes
+    scene_names = [str(scene) for scene in scenes]
     characters = sorted(list(play.characters), key=lambda c: c.name)
     character_names = [character.name for character in characters]
 
