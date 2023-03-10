@@ -2,6 +2,7 @@ from plotly.graph_objs import Bar, Histogram, Layout, Heatmap
 from plotly.tools import FigureFactory
 from operator import attrgetter
 from stats import isInScene, speechesPerScene, linesPerScene, wordsPerScene
+import seaborn as sns
 
 # ========================================
 # Bar Plots
