@@ -78,6 +78,8 @@ def characterSpeechPlot(play, characters=None):
 def characterScenePlot(play, characters=None):
     return characterPlot(play, lambda c: c.numScenes, 'scenes', characters)
 
+def dataframeBarChart(df, columns, color='#d65f5f'):
+    return df.style.bar(subset=columns, color='#d65f5f')
 
 # ========================================
 # Character heat maps
@@ -122,7 +124,6 @@ def heatMap(x, y, z, title=None):
 
     return {'data': data, 'layout': layout}
 
-
 def characterMap(play, metric=isInScene, characters=None):
 
     if not characters:
@@ -143,6 +144,13 @@ def characterMap(play, metric=isInScene, characters=None):
 
     return heatMap(sceneNames, characterNames, intensities)
 
+def dataframeHeatMap(df, color='orange'):
+    return (df
+            .style
+            .set_table_styles([{'selector': 'td', 'props': [('border', '2px solid white')]}])
+            .background_gradient(cmap = sns.light_palette(color, as_cmap=True))
+            .highlight_min(axis=1, props='color: transparent')
+            )
 # ========================================
 # Character comparison
 # ========================================
