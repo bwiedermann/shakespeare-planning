@@ -63,6 +63,7 @@ def scene2speeches(text, act, scene):
     return speeches
 
 def processText(title, text):
+    registered.__defaults__ = ({},)  # reset the registry
     play = Play(title)
 
     # parse the text into acts
